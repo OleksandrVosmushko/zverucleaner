@@ -14,7 +14,11 @@
 #include <fstream>
 #include <filesystem>
 #include <Shlwapi.h>
+#include <list>
+#include "ShellAPI.h";
+#include <ShellAPI.h>
 
+#include<Htmlhelp.h>
 
 
 #include <stdlib.h>
@@ -34,12 +38,14 @@ using namespace std;
 #define HOT_EXIT 52
 #define HOT_REMOVE 51
 #define HOT_CNTRL_S 50
+#define HOT_HELP 57
 
 #define IDM_RUN_REMOVE 14
 #define IDM_FILE_SAVE 1
 #define IDM_FILE_OPEN 2
 #define IDM_FILE_QUIT 3
 #define IDM_INFO_ABOUT 12
+#define IDM_INFO_HELP 15
 #define IDM_RUN_RUN 13
 #define IDD_STATUSBAR 4
 #define IDD_PROGRESS 5
@@ -420,7 +426,8 @@ void AddMenus(HWND hwnd) {
 	AppendMenuW(hRun, MF_STRING, IDM_RUN_REMOVE, L"&Видалити файл delete");
 
 	AppendMenuW(hInfo, MF_STRING, IDM_INFO_ABOUT, L"&Про програму ctrl+i");
-	
+	AppendMenuW(hInfo, MF_STRING, IDM_INFO_HELP, L"&Допомога F1");
+
 
 
 	AppendMenuW(hMenubar, MF_POPUP, (UINT_PTR)hMenu, L"&Файл");
@@ -641,14 +648,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 	case WM_CREATE:
 	{
-	
 		RegisterHotKey(hWnd,HOT_CNTRL_S,MOD_CONTROL, 0x53);//s key
 		RegisterHotKey(hWnd, HOT_CNTRL_O, MOD_CONTROL, 0x4F);//o key
 		RegisterHotKey(hWnd, HOT_ABOUT, MOD_CONTROL, 0x49);// i 
 		RegisterHotKey(hWnd, HOT_RUN, MOD_CONTROL, 0x52);//r
 		RegisterHotKey(hWnd, HOT_EXIT, 0, VK_ESCAPE);
 		RegisterHotKey(hWnd, HOT_REMOVE, 0, VK_DELETE);
+		RegisterHotKey(hWnd, HOT_HELP, 0, VK_F1);
+		//HtmlHelp(hWnd, L"/NewProject", HH_HELP_CONTEXT,);
 		
+	//	HtmlHelp(hWnd, L"/NewProject.hmxz", HH_HELP_CONTEXT, NULL);
+	//	ShellExecute(hWnd, L"open", L"NewProject.chm", NULL, NULL, SW_SHOWNORMAL);
+
 		hwndList = CreateWindow(WC_LISTVIEW, L"",
 			WS_VISIBLE | WS_BORDER | WS_CHILD | LVS_REPORT | LVS_EDITLABELS,
 			0, 50, 496 -50, 100,
@@ -879,6 +890,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 					}
 					break;
 				}
+			case IDM_INFO_HELP:
+				{
+				ShellExecute(hWnd, L"open", L"NewProject.chm", NULL, NULL, SW_SHOWNORMAL);
+				break;
+				}
+
 			case IDM_FILE_QUIT:
             case IDM_EXIT:
                 DestroyWindow(hWnd);
@@ -898,7 +915,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         break;
 	case WM_HOTKEY:
-
+		if (HOT_HELP == (int)wParam)
+		{
+			ShellExecute(hWnd, L"open", L"NewProject.chm", NULL, NULL, SW_SHOWNORMAL);
+			break;
+		}
 		if (HOT_CNTRL_S == (int)wParam)
 		{
 			save();

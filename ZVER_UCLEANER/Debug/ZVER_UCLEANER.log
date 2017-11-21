@@ -1,2 +1,8 @@
-﻿  ZVER_UCLEANER.vcxproj -> C:\Users\1pi15\source\repos\ZVER_UCLEANER\Debug\ZVER_UCLEANER.exe
+﻿  ZVERUCLEANER.cpp
+c:\users\1pi15\source\repos\zver_ucleaner\zver_ucleaner\zverucleaner.cpp(18): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\1pi15\source\repos\zver_ucleaner\zver_ucleaner\zverucleaner.cpp(810): warning C4018: '<': signed/unsigned mismatch
+c:\users\1pi15\source\repos\zver_ucleaner\zver_ucleaner\zverucleaner.cpp(981): warning C4018: '<': signed/unsigned mismatch
+c:\users\1pi15\source\repos\zver_ucleaner\zver_ucleaner\zverucleaner.cpp(640): warning C4101: 'pParts': unreferenced local variable
+c:\users\1pi15\source\repos\zver_ucleaner\zver_ucleaner\zverucleaner.cpp(641): warning C4101: 'hwndSb': unreferenced local variable
+  ZVER_UCLEANER.vcxproj -> C:\Users\1pi15\source\repos\ZVER_UCLEANER\Debug\ZVER_UCLEANER.exe
   ZVER_UCLEANER.vcxproj -> C:\Users\1pi15\source\repos\ZVER_UCLEANER\Debug\ZVER_UCLEANER.pdb (Partial PDB)
